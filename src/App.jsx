@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const listData = useSelector(state => state.list);
+
   return (
     <div>
         <TodoAdder/>
