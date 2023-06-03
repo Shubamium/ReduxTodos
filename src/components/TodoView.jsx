@@ -67,6 +67,7 @@ const StyledEditDialog = styled.dialog`
         opacity:1;
         backdrop-filter: blur(5px);
     }
+    min-width: 60vw;
 
 `
 const EditDialog = (props) => {

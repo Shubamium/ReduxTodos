@@ -6,15 +6,14 @@ import styled from 'styled-components';
 
 const StyledFormAdder = styled.form`
     .form-field{
-        margin: 0 auto;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
         & input,& textarea{
-            width: 100%;
-            display: block;
-            resize: none;
-
+            padding: 1.2em;
+            margin: .5em;
         }
         label{
-            width:100%;
             display: block;
         }
     }
