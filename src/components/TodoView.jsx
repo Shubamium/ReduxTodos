@@ -1,4 +1,5 @@
 
+
 export const TodoView = (props) => {
     function renderList(list){
         return list.map((task)=>{
@@ -16,12 +17,11 @@ export const TodoView = (props) => {
 }
 
 
-
 const List = (props) => {
   return (
     <div>
-        <h2>${props.title}</h2>
-        <h2>${props.description}</h2>
+        <h2>{props.title}</h2>
+        <p>{props.description}</p>
     </div>
   )
 }

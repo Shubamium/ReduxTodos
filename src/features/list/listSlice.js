@@ -1,4 +1,4 @@
-import {configureSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
     todos:[
@@ -10,8 +10,8 @@ const initialState = {
     ]
 }
 
-const id = 0;
-const listSlice = configureSlice({
+let id = 0;
+const listSlice = createSlice({
     name:'list',
     initialState,
     reducer:{
@@ -23,6 +23,6 @@ const listSlice = configureSlice({
 });
 
 
-const listReducers = listSlice.reducers;
+const listReducers = listSlice.reducer;
 export default listReducers;
 export const listActions = listSlice.actions;
