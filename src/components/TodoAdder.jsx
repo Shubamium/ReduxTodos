@@ -2,7 +2,23 @@ import React, { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux';
 import { listActions } from '../features/list/listSlice';
+import styled from 'styled-components';
 
+const StyledFormAdder = styled.form`
+    .form-field{
+        margin: 0 auto;
+        & input,& textarea{
+            width: 100%;
+            display: block;
+            resize: none;
+
+        }
+        label{
+            width:100%;
+            display: block;
+        }
+    }
+`
 export const TodoAdder = (props) => {
     const {register,handleSubmit,setValue} = useForm();
     const dispatch = useDispatch();
@@ -26,16 +42,16 @@ export const TodoAdder = (props) => {
     },[props.placeholder]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <StyledFormAdder onSubmit={handleSubmit(onSubmit)} >
             <div className='form-field'>
                 <label htmlFor="title">Task Name: </label>
                 <input type="text"  {...register("title",{required:true})} placeholder='What do you need to do?' />
             </div>
             <div className="form-field">
                 <label htmlFor="description" placeholder='Describe the task in detail here!'>Description:</label>
-                <textarea  {...register("description")}></textarea>
+                <textarea placeholder='Describe the task in more detail here!'  {...register("description")}></textarea>
             </div>
             <button type='submit'>{props.isEdit ? 'Edit' : 'Add'}</button>
-        </form>
+        </StyledFormAdder>
     )
 }
