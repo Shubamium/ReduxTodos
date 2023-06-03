@@ -28,6 +28,20 @@ function App() {
 
 
 export const StyledButton = styled.button`
-  
+  padding: .2em 2em;
+  border: none;
+  transition:  all 250ms ease;
+  font-size: 1.2rem;
+  background-color:${props => props.bgColor || '#1b73e5'};
+  color: white;
+  box-shadow: 0px 0px 3px 2px #1717171c;
+  outline: 2px solid white;
+  margin: 0 1em;
+  &:hover{
+    cursor: pointer;
+    scale: 1.02;
+    outline: 4px solid black;
+    box-shadow: 0px 0px 3px 0 #17171743;
+  }
 `
 export default App

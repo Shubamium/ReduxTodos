@@ -4,6 +4,7 @@ import { TodoAdder } from "./TodoAdder"
 import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { createPortal,findDOMNode } from "react-dom"
+import { StyledButton } from "../App"
 
 
 const StyledList = styled.div`
@@ -65,8 +66,8 @@ const List = (props) => {
         <div className="list">
             <h2>{props.title}</h2>
             <p>{props.description}</p>
-            <button onClick={handleRemove}>Remove</button>
-            <button onClick={()=>{props.onEdit && props.onEdit()}}>Edit</button>
+            <StyledButton bgColor={'#ff588d'} onClick={handleRemove}>Remove</StyledButton>
+            <StyledButton onClick={()=>{props.onEdit && props.onEdit()}}>Edit</StyledButton>
         </div>
     )
 }
@@ -91,7 +92,7 @@ const EditDialog = (props) => {
     },[props.isOpen]);
     return (
         <StyledEditDialog ref={modalRef}>
-            <button onClick={closeDialog}>Close</button>
+            <StyledButton bgColor={'#ff588d'}  onClick={closeDialog}>X</StyledButton>
             <h2>Edit Task</h2>
             <TodoAdder placeholder={props.placeholder} onSubmit={closeDialog} toEdit={props.id} isEdit={true}/>
         </StyledEditDialog>

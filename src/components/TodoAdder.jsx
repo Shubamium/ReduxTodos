@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux';
 import { listActions } from '../features/list/listSlice';
 import styled from 'styled-components';
+import { StyledButton } from '../App';
 
 const StyledFormAdder = styled.form`
     .form-field{
@@ -12,8 +13,17 @@ const StyledFormAdder = styled.form`
         & input,& textarea{
             padding: 1.2em;
             margin: .5em;
+            resize: none;
+            font-size: 1rem;
+        }
+        & textarea{
+            font-size: 1rem;
+            min-height:20vh;
         }
         label{
+            font-size: 1.5rem;
+            text-align: left;
+            opacity: .5;
             display: block;
         }
     }
@@ -50,7 +60,7 @@ export const TodoAdder = (props) => {
                 <label htmlFor="description" placeholder='Describe the task in detail here!'>Description:</label>
                 <textarea placeholder='Describe the task in more detail here!'  {...register("description")}></textarea>
             </div>
-            <button type='submit'>{props.isEdit ? 'Edit' : 'Add'}</button>
+            <StyledButton type='submit'>{props.isEdit ? 'Edit' : 'Add'}</StyledButton>
         </StyledFormAdder>
     )
 }
