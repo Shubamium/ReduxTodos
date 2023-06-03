@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux"
 import { listActions } from "../features/list/listSlice"
 import { TodoAdder } from "./TodoAdder"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
+import { createPortal,findDOMNode } from "react-dom"
 
 
 export const TodoView = (props) => {
@@ -30,11 +32,16 @@ export const TodoView = (props) => {
             )
         })
     }
+    function renderEditDialog(){
+        const root = document.getElementById('root');
+        const childrn = <EditDialog placeholder={placeholder} id={toEdit} isOpen={dialog} onClose={closeDialog}></EditDialog>;
+        return createPortal(childrn,root);
+    }
     return (
-        <div>
+        <div style={{position:'relative'}}>
             <h2>To-Do List</h2>
             {props.list && renderList(props.list)}
-            <EditDialog placeholder={placeholder} id={toEdit} isOpen={dialog} onClose={closeDialog}></EditDialog>
+            {renderEditDialog()}
         </div>
     )
 }
@@ -55,14 +62,28 @@ const List = (props) => {
     )
 }
 
+const StyledEditDialog = styled.dialog`
+    &::backdrop{
+        opacity:1;
+        backdrop-filter: blur(5px);
+    }
 
+`
 const EditDialog = (props) => {
     const closeDialog = ()=>{props.onClose && props.onClose()};
+    const modalRef = useRef();
+    useEffect(()=>{
+        if(props.isOpen){
+            modalRef.current.showModal();
+        }else{
+            modalRef.current.close();
+        }
+    },[props.isOpen]);
     return (
-        <dialog open={props.isOpen}>
+        <StyledEditDialog ref={modalRef}>
             <button onClick={closeDialog}>Close</button>
             <h2>Edit Task</h2>
             <TodoAdder placeholder={props.placeholder} onSubmit={closeDialog} toEdit={props.id} isEdit={true}/>
-        </dialog>
+        </StyledEditDialog>
     )   
 }
