@@ -14,10 +14,14 @@ let id = 0;
 const listSlice = createSlice({
     name:'list',
     initialState,
-    reducer:{
+    reducers:{
         add:(state,action)=>{
             id++;
             state.todos.push({...action.payload,id:id});
+        },
+        remove:(state,action)=>{
+            // state.todos.splice(action.payload,1); Doesn't work if want to delete specific id
+            state.todos = state.todos.filter((list) => list.id != action.payload); 
         }
     }
 });
