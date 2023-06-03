@@ -8,15 +8,20 @@ export const TodoView = (props) => {
    
     const [toEdit,setToEdit] = useState(0);
     const [dialog,setDialog] = useState(false);
+    const [placeholder,setPlaceholder] = useState({});
     function editList(id){
         setToEdit(id);
-        openDialog();
+        openDialog(); 
+        const edit = props.list.find((val)=>val.id === id);
+        console.log(edit);
+        setPlaceholder(edit);
     }
     function openDialog(){
         setDialog(true);
     }
     function closeDialog(){
         setDialog(false);
+        setPlaceholder({});
     }
     function renderList(list){
         return list.map((task)=>{
@@ -29,7 +34,7 @@ export const TodoView = (props) => {
         <div>
             <h2>To-Do List</h2>
             {props.list && renderList(props.list)}
-            <EditDialog id={toEdit} isOpen={dialog} onClose={closeDialog}></EditDialog>
+            <EditDialog placeholder={placeholder} id={toEdit} isOpen={dialog} onClose={closeDialog}></EditDialog>
         </div>
     )
 }
@@ -52,11 +57,12 @@ const List = (props) => {
 
 
 const EditDialog = (props) => {
+    const closeDialog = ()=>{props.onClose && props.onClose()};
     return (
         <dialog open={props.isOpen}>
-            <button onClick={()=>{props.onClose && props.onClose()}}>Close</button>
+            <button onClick={closeDialog}>Close</button>
             <h2>Edit Task</h2>
-            <TodoAdder toEdit={props.id} isEdit={true}/>
+            <TodoAdder placeholder={props.placeholder} onSubmit={closeDialog} toEdit={props.id} isEdit={true}/>
         </dialog>
     )   
 }

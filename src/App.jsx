@@ -9,6 +9,7 @@ function App() {
 
   return (
     <div>
+        <h1>Redux Toolkit - Todo List/Crud App Example</h1>
         <TodoAdder/>
         {listData &&  <TodoView list={listData.todos}/>}
     </div>

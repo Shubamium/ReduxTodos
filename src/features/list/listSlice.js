@@ -22,6 +22,9 @@ const listSlice = createSlice({
         remove:(state,action)=>{
             // state.todos.splice(action.payload,1); Doesn't work if want to delete specific id
             state.todos = state.todos.filter((list) => list.id != action.payload); 
+        },
+        edit:(state,action)=>{
+            state.todos[action.payload.id] = {...state.todos[action.payload.id],...action.payload.data};
         }
     }
 });
