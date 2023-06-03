@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledApp = styled.div`
-  
-
   .content{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -28,4 +26,8 @@ function App() {
   )
 }
 
+
+export const StyledButton = styled.button`
+  
+`
 export default App

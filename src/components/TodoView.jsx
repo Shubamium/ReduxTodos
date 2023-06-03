@@ -6,6 +6,15 @@ import styled from "styled-components"
 import { createPortal,findDOMNode } from "react-dom"
 
 
+const StyledList = styled.div`
+    background-color: #ffffff;
+
+    & .list{
+        background-color: rgb(92, 160, 255);
+        margin: 1em;
+        padding-bottom: 1em;
+    }
+`
 export const TodoView = (props) => {
    
     const [toEdit,setToEdit] = useState(0);
@@ -38,11 +47,11 @@ export const TodoView = (props) => {
         return createPortal(childrn,root);
     }
     return (
-        <div style={{position:'relative'}}>
+        <StyledList style={{position:'relative'}}>
             <h2>To-Do List</h2>
             {props.list && renderList(props.list)}
             {renderEditDialog()}
-        </div>
+        </StyledList>
     )
 }
 
@@ -53,7 +62,7 @@ const List = (props) => {
         dispatch(listActions.remove(props.id));
     }    
     return (
-        <div>
+        <div className="list">
             <h2>{props.title}</h2>
             <p>{props.description}</p>
             <button onClick={handleRemove}>Remove</button>
